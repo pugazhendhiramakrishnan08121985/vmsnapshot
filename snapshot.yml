@@ -2,7 +2,6 @@
   hosts: all
   vars_files:
     - credentials.yml
-  become: yes
   tasks:
     - name: colect HW fact
       setup:
@@ -14,8 +13,10 @@
     - name: Fetch the UUID of the managed hosts
       shell: dmidecode -s system-serial-number | awk '{print $1$2$3$4"-"$5$6"-"$7$8$9"-"$10$11$12$13$14$15}' | cut -d'-' --complement -f1
       register: uuid
+      become: yes
     - debug:
         msg: "{{ uuid.stdout }}"
+      become: yes
 
 
     - name: Create a snapshot
