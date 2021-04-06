@@ -3,7 +3,7 @@
   vars_files:
     - credentials.yml
   tasks:
-    - name: colect HW fact
+    - name: collect HW fact
       setup:
         gather_subset:
           - hardware
